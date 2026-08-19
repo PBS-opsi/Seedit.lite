@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Seed It - Dari setiap transaksi, lahir sebuah aksi.">
+<title>Seed It | Green Marketplace</title>
+<style>
+:root{
+ --green:#87c34a;--green2:#69a63a;--dark:#456f28;--cream:#f1ecdc;
+ --line:#8bc54f;--gold:#f3c900;--text:#426a28;--shadow:0 10px 25px rgba(62,93,34,.18);
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:#fff;font-family:Arial,Helvetica,sans-serif;color:var(--text)}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.header{height:58px;background:var(--green);display:flex;align-items:center;padding:0 4.5%;gap:18px;box-shadow:0 2px 5px #7775;position:sticky;top:0;z-index:100}
+.coin{width:45px;height:45px;border-radius:50%;display:grid;place-items:center;font-size:31px;filter:drop-shadow(1px 2px 1px #5555)}
+.search{height:38px;width:245px;border:0;border-radius:6px;padding:0 14px;outline:none;background:#fff;color:#555}
+.nav{margin-left:auto;display:flex;align-items:center;gap:18px;color:white;font-weight:600}
+.nav a{font-size:15px}.nav a:hover{text-decoration:underline}
+.round{width:37px;height:37px;border:2px solid var(--dark);border-radius:50%;background:#edf1d8;color:var(--dark);font-size:18px}
+.cart-wrap{position:relative}.badge{position:absolute;right:-5px;top:-5px;background:white;color:var(--dark);font-size:10px;width:17px;height:17px;border-radius:50%;display:grid;place-items:center}
+.page{min-height:calc(100vh - 58px)}
+.hero{height:305px;display:grid;grid-template-columns:56% 44%;overflow:hidden}
+.hero-img{background:
+linear-gradient(90deg,#173e17b8,#173e1740),
+url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=85") center/cover}
+.hero-copy{padding:78px 5%;color:#fff;max-width:540px}
+.hero-copy h1{font-size:25px;margin:0 0 8px;line-height:1.15}
+.hero-copy p{font-size:10px;line-height:1.35;margin:0;max-width:420px}
+.brand{background:var(--cream);display:grid;place-items:center;text-align:center}
+.brand h1,.footer-brand h1{font-family:Georgia,serif;font-weight:500;color:#667346;font-size:52px;margin:0;line-height:.8}
+.brand h1:after,.footer-brand h1:after{content:"🌱";font-size:27px;vertical-align:top}
+.tagline{font:italic 11px Georgia,serif;color:#617044;margin-top:9px}
+.section{padding:18px 5% 32px}.rounded-top{border-radius:25px 25px 0 0}
+.white-section{background:#fff}.cream-section{background:var(--cream)}
+.title{text-align:center;font-size:16px;color:var(--dark);margin:0 0 10px}
+.rule{height:2px;background:var(--dark);width:230px;margin:0 auto 16px}
+.picks{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;max-width:760px;margin:auto}
+.card{border:1px solid #b7d98d;border-radius:9px;background:#fff;padding:8px;box-shadow:var(--shadow);transition:.2s}
+.card:hover{transform:translateY(-3px)}
+.prod-img{height:76px;border-radius:4px;background:#f4df70;overflow:hidden}
+.prod-img img{width:100%;height:100%;object-fit:cover}
+.card h4{font-size:9px;margin:6px 0 3px}.price{font-size:10px;margin-bottom:2px}.stars{color:var(--gold);font-size:11px;letter-spacing:1px}
+.mini-actions{display:flex;gap:4px;margin-top:6px}.mini-actions button{border:0;background:var(--green);color:#fff;border-radius:4px;padding:4px;font-size:8px;flex:1}
+.impact{background:var(--cream);padding:25px 6% 30px}
+.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:45px;max-width:850px;margin:auto;text-align:center}
+.impact-icon{font-size:31px;color:#ffc900}.impact-num{font-size:23px;font-weight:bold;color:var(--green2);margin:5px}
+.impact p{font-size:10px;font-style:italic;line-height:1.4;margin:0}
+.footer{background:var(--green);min-height:112px;padding:14px 7%;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;color:white}
+.footer-brand h1{font-size:42px;color:#5b703c}.footer-brand .tagline{color:#58703d}
+.footer-nav{display:flex;justify-content:center;gap:15px;font-size:10px}.footer-help{text-align:right;font-size:9px;line-height:1.7}
+.catalog-page{background:#fff;min-height:calc(100vh - 58px)}
+.toolbar{background:var(--cream);padding:7px 10px;display:flex;gap:8px;align-items:center;font-size:8px}
+.sort-btn{border:0;background:white;color:var(--green2);padding:5px 12px;border-radius:3px;box-shadow:0 1px 3px #aaa5}
+.catalog-layout{display:grid;grid-template-columns:95px 1fr;gap:10px;padding:12px 4%}
+.filters{font-size:8px;color:#555}.filters strong{display:block;margin:9px 0 6px}.filters label{display:block;margin:7px 0}
+.catalog-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:13px}
+.detail-page,.checkout-page,.impact-page,.profile-page{background:#fff;min-height:calc(100vh - 58px);padding:35px 5%}
+.detail-box,.checkout-box{border:2px solid #cbe5a8;border-radius:27px;box-shadow:var(--shadow);max-width:520px;margin:auto;padding:28px}
+.detail-main{display:grid;grid-template-columns:170px 1fr;gap:18px;align-items:center}
+.detail-main .prod-img{height:150px}.detail-main h2{font-size:15px}.detail-main p{font-size:12px}.qty{display:flex;align-items:center;gap:5px}.qty button{border:0;background:var(--green);color:white;width:24px;height:24px;border-radius:2px}
+.checkout-box{max-width:600px}.fieldbar{border:1px solid var(--green);border-radius:6px;text-align:center;padding:9px;color:var(--green2);font-weight:bold;margin-bottom:15px;box-shadow:var(--shadow)}
+.checkout-product{display:grid;grid-template-columns:100px 1fr 55px;gap:15px;align-items:center}.checkout-product .prod-img{height:75px}.checkout-product h3{font-size:15px}.delivery,.donate{margin:15px 0;border:1px solid var(--green);border-radius:6px;padding:10px;text-align:center;color:var(--green2);box-shadow:var(--shadow)}
+.pay-row{display:flex;align-items:center;justify-content:space-between;margin-top:12px}.pay{background:var(--green);border:0;color:#fff;padding:10px 20px;border-radius:6px;box-shadow:var(--shadow)}
+.review{margin:35px auto 0;max-width:520px;border:1px solid var(--green);border-radius:20px;padding:18px}.review h3{text-align:center;font-size:13px;border-bottom:2px solid var(--dark);padding-bottom:7px}.review input{border:1px solid #bbb;border-radius:6px;height:24px}
+.impact-page{padding:0;background:#fff}.impact-hero{display:grid;grid-template-columns:45% 55%;background:#fff}.impact-hero img{width:100%;height:145px;object-fit:cover}.impact-hero-text{padding:20px 25px}.impact-hero-text h2{font-size:16px;margin:0}.impact-hero-text p{font-size:9px;line-height:1.4}.impact-page .title{margin:15px}
+.impact-item{display:grid;grid-template-columns:1fr 100px 1fr;gap:18px;align-items:center;max-width:850px;margin:18px auto;padding:0 25px}.impact-item:nth-child(even){grid-template-columns:1fr 100px 1fr}.impact-item .text{font-size:8px;line-height:1.4}.impact-count{text-align:center}.impact-count .impact-icon{font-size:24px}.green-box{background:var(--green);border-radius:9px;padding:14px;color:white;box-shadow:var(--shadow);font-size:8px;line-height:1.8}
+.join-link{text-align:center;margin:30px;font-size:10px;color:var(--green2);font-weight:bold}
+.profile-page{display:grid;place-items:center}.profile-card{width:min(420px,100%);background:var(--cream);border-radius:45px;padding:45px 30px 30px;box-shadow:var(--shadow);text-align:center;position:relative}.profile-icon{width:58px;height:58px;border:3px solid var(--dark);border-radius:50%;position:absolute;top:-29px;left:calc(50% - 29px);background:#fff;display:grid;place-items:center;font-size:30px}.profile-card p{text-align:left;margin:18px 0;color:var(--green2);font-size:12px}.profile-card button{background:var(--green);color:#fff;border:0;border-radius:6px;padding:9px 34px}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;z-index:200;padding:20px}.modal.open{display:flex}.modal-card{background:var(--cream);width:min(560px,100%);border:2px solid var(--green);border-radius:35px;padding:28px;box-shadow:0 20px 60px #0005;position:relative}.close{position:absolute;right:16px;top:10px;border:0;background:transparent;font-size:28px;color:var(--dark)}.modal-card h2{text-align:center;margin:0 0 10px;font-size:20px;border-bottom:2px solid var(--dark);padding-bottom:8px}.form{display:grid;gap:9px;max-width:245px;margin:auto}.form input,.form textarea{border:1px solid #a6b88d;background:#f4f0e4;border-radius:10px;padding:7px 10px;font-size:9px;outline:none}.form textarea{min-height:60px}.form button{border:0;background:var(--green);color:white;border-radius:6px;padding:8px;margin:8px auto 0}.signin-buttons{display:flex;gap:12px;justify-content:center;margin-top:8px}.signin-buttons button{border:1px solid #b4cc91;background:#fff;border-radius:5px;padding:8px 18px;color:var(--green2)}
+.toast{position:fixed;right:20px;bottom:20px;background:var(--dark);color:#fff;padding:12px 16px;border-radius:8px;display:none;z-index:500;font-size:11px}
+@media(max-width:800px){
+ .header{gap:8px;padding:0 12px}.search{width:150px}.nav{gap:8px}.nav a{font-size:11px}.coin{width:35px}
+ .hero{grid-template-columns:1fr;height:auto}.hero-img{height:260px}.brand{height:145px}
+ .picks{grid-template-columns:repeat(3,1fr)}.catalog-layout{grid-template-columns:65px 1fr}.catalog-grid{grid-template-columns:repeat(3,1fr)}
+ .footer{grid-template-columns:1fr;text-align:center;gap:12px}.footer-help{text-align:center}.impact-grid{gap:12px}
+ .impact-item{grid-template-columns:1fr!important;text-align:center}.green-box{max-width:250px;margin:auto}
+}
+@media(max-width:500px){
+ .nav a{display:none}.search{width:130px}.picks,.catalog-grid{grid-template-columns:repeat(2,1fr)}.detail-main{grid-template-columns:1fr}.checkout-product{grid-template-columns:75px 1fr}.checkout-product .qty{grid-column:2}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+ <a class="coin" href="#home" onclick="go('home')">🪙</a>
+ <input id="search" class="search" placeholder="⌕   Search Products . . ." oninput="filterProducts(this.value)">
+ <nav class="nav">
+  <a href="#home" onclick="go('home')">Home</a>
+  <a href="#catalog" onclick="go('catalog')">Catalog</a>
+  <a href="#join" onclick="openModal('signinModal')">Join Us</a>
+  <a href="#contact" onclick="showToast('Kontak Seed It siap membantu.')">Contact</a>
+  <span class="cart-wrap"><button class="round" onclick="go('checkout')">🛒</button><span id="badge" class="badge">0</span></span>
+  <button class="round" onclick="openModal('signinModal')">♙</button>
+ </nav>
+</header>
+
+<main id="app"></main>
+
+<footer class="footer">
+ <div class="footer-brand"><h1>Seed It</h1><div class="tagline">“Dari setiap transaksi, lahir sebuah aksi”</div></div>
+ <div class="footer-nav"><a href="#home" onclick="go('home')">Home</a><a href="#catalog" onclick="go('catalog')">Catalog</a><a href="#join" onclick="openModal('signinModal')">Join Us</a><a href="#contact">Contact</a></div>
+ <div class="footer-help">Perlu bantuan?<br>Beri saran & masukan<br>Mulai berjualan</div>
+</footer>
+
+<div id="modal" class="modal" onclick="outside(event)">
+ <div id="modalCard" class="modal-card"></div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+const img="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQDAwMEBAQFBgoGBgUFBgwICQcKDgwPDg4MDQ0PERYTDxAVEQ0NExoTFRcYGRkZDxIbHRsYHRYYGRj/2wBDAQQEBAYFBgsGBgsYEA0QGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBj/wAARCADcANwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7+o6UhIxnNZs+rRRuY8c1MpqO4m0tzSLL/eH500so/iFYLW19dS+dE5CHtUv2C/7uay9tJ7RJ532NkOg/iFAdP7wrG+wX3980fYL7++aPay/lDmfY2TImPvCjev8AeFY32C+/vmj+z77++aPay/lDmfY2d6/3hS+Yn94Vi/2fff3zR9gvv75o9rL+UOZ9ja8xP7wpC65+8KxvsF9/fNL9gv8A/noaPay/lDmfY2N6/wB4Ub1/vCsb7Bff3zR9gvv75o9rL+UOZ9jZ3r/eFG9f7wrG+wX3980f2fff3zR7WX8ocz7GzvTH3hRvX+8Kxv7Pvv75o/s++/vmj2sv5Q5n2Nkuh/iFAdP7wrG+wX3980fYL7++aPay/lDmfY2vMT+8KQun94Vjf2fff3zR9gvv75o9rL+UOZ9jZ3r/AHhS70P8QrF/s++/vmmvp+oH7sho9rL+UOZ9jc3p/eH504EHoawhp+obf9Yc1Il8bL93PkkUKt/MrAp90bNFQWt0l1HuSp62TTV0Xe5k6rdPGgER6+lQ2On+cRNMuc81W0h21KT9/wBua6NEEcYRegrmgvavnexlFczuEcaxoEQYAp1V729ttPs2uruQRxL1Y9q5Z/if4PWbyxqaE9OtaVMRSpfHJI3jCUvhR2NFc3B458O3OPKvUbPvV5fEemMMrOCPrXO8zwi3qr7y/Y1P5TWorK/4SHTf+ewo/wCEh03/AJ7D86X9q4P/AJ+r7w9jU/lNWisr/hIdN/57D86P+Eh03/nsPzo/tTB/8/V94ewqfymrRWV/wkGm/wDPYfnS/wDCQad/z2H50f2rg/8An7H7w9hU/lZqUVl/2/p3/PYfnR/wkGnf89h+dH9q4P8A5+r7w9hU/lNSisr/AISDTf8AnsPzo/4SHTf+ew/Ol/auD/5+x+8PYVP5WatFZX/CQ6Z/z3H50f8ACRaZ/wA9x+dP+1cH/wA/V94ewqfys1aKyv8AhItM/wCe4/Ok/wCEi0z/AJ7j86P7Vwf/AD9X3h7Cp/KzWorIPiTSx/y3X86b/wAJNpX/AD8L+dH9qYP/AJ+r7w9hU/lZs0VjHxPpI/5eF/OmnxTpAP8Ax8L+dH9qYT/n6vvD2NT+U26qXdjFOjMV+amWmrWN6wW3mDE9hV6uqE6daN4O6M5Ra0kjmsz2N4sYyFJrfjnUxgk1BfWsckTTEfMoyK5SXVbmOUoDwKwdRUHaWxhzcm5s6DEEkOK36w9E++a3K1w3wIun8J5j8ZdWmtfAN3DGSu5eor4djvrtrySQ3Mmd3qa+1vjaB/whFz/umviOAfv5B/tV+f8AFcm8Qk+x9DliXIzr9H8WX1m6jznIHvXpWhePHnVUmnI+prxRBgcVahmmjYFXI+lfCVsLCZ6h9OWOr291GCLnJ+taKszLlZSR9a+dtJ8S3Fk6kyMQPevRNF8eLIFjfv615VbCOOwz0cLJ/fal2v8A89Gqjp+rW17GD5qg/WtRQjDKtmuNxaKTItj/APPRvzpcOB99vzqfy+KPLqBuRBiTH+sagiT/AJ6H86sbMUbKLk3KuyT/AJ6N+dIVfpvb86tFM03y6VzWOxW2yY++350bXH/LRqsFKaY6dxlYh/8Ano1NIkx/rGqyY6YVNNNCKro+M+a1QNHJn/Wt+dXmSo2j5qrCKDLJ/wA9G/OoZEk6+a1X3jqFk+WmtBWNzwNezR60ELE8969jicvGGNeNeC1xrw+teyxf6ofSv2bgCpKeBfM+p85msUqug25GbRx7Vxs1uPPb612Vx/x7P9K5Kb/XN9a+uxiTseJWNbRPvmtysPRPvmtyt8P8CNKfwnkvxt/5Ee6/3TXxNAP38n+9X218bP8AkSLn/dNfFFuv76T/AHjX55xZ/vC9D6HLP4bLSDFToM0xBxU8Y5r46b0PUJUUYqzC8sZBRsVCvWp0GRXM3cDf0rXru0kXdM2B716LpHjmLYqyHJ968iRTnNW4ZHjIK5rlq0lIo+g7DX7e+ACsBmthNjLkMDXz9p2s3lvINrsAK77RvFhCqJ3JrgqYZrVBY9E2ZNBSsuy8QWtwAAea2YmWZcqRXLJNblKyIdlJ5dWfLxSFDioKK+zmmlKteXTSnPSgdkytsphjzVsx0zb7U7gU2jqIpV5oziozH7VSZLZRZaieMEdKuvEfSomjOK0TE0XvBy410fWvX4/9WPpXlHhNMa0PrXq8X+rH0r9j8Pf9xfqfPZr/ABBtx/x7P9K5Kb/XN9a624/49n+lclN/rm+tfZ4voeJVNbRPvmtysPRPvmtytsP8CLp/CeT/ABrGfBFz/umviqAETSf7xr7X+NIz4Juf9018Vwr++k/3jX51xa/9pXofQ5a/3ZZjBxViNajjWrMa4618bLU9K49V5qzGvFMRM1ZjSsmhjgMCt3QNOF9LtYZrIVMius8HnZc9O9TYuL1Ohs/CCEBmj4rTTw5ZwcsuK6a2cG0HA6VUvW+Q1Mo3N1JdjEka0sf9WcEUtv4oeGQL5nFY2qgmQ81kLa3E8v7pSameFUo6K7FOyjc9a0/xDaXCKGkGa3IZYp1BQg15Xpmk6lgGGNyR6Vt2+p6npsm24jZVHc1yV8orwjz8rscqrQbsmd+YuOlN8odxWNp/iCG4Ub5BW1FcQyrlGBry3Bo0uN8qmGL2q2BnpSFPalYFIpGM46UwxcVeKUxk4pg3czmjqJ4uDWi0ftUTR8dK0jsO5N4WjxrAOO9eoJ/qxXnPhyPGqj616Mn+rFfsnh7/ALi/U+ezX+KMuP8Aj2f6VyU3+ub611tx/wAez/SuSm/1zfWvs8X0PFqmton3zW5WHon3zW5W2H+BF0/hPKvjOM+Crn/dNfGFun7+T/er7R+Mn/ImXP8Aumvje3T99L/vGvzni1/7UvQ+gy3+GyZI6spHmkjSrkcdfHyPRQ2NMVaRKckVTpH7Vm2UCR5HSuk8MLtuKxY48jpW/wCH023AqGyj0+0/48l+lVbz7pqzan/Ql+lVrsHBoNIbnJ6iAZyD0rsvBGgWt9bvIxBxXA67OY5GxxWx4H8WnTont2yd/Ga9fJcbh6WJj9Z+EnH0ZyoNw3PWNOjstPndQEbFcv4veK5jfYoX6VUl1FrZjdtNw/OM1lz6p/aLmMd6+zznNsL9WdLTXY8HB4So6iZgxNPby4UtjNdFp+tzW+Acmq4s1UYIBNIbYdRX5dOjGTPpPYnW2niBXUbiBWraaily+ARXnflyDo2K2fDzyC8wWJrmq4RRi2hTpJK53PUU0gYoQ/LRXmtowGkCmMoxUtRsOOtNSQF3QAP7T/Gu9T7grhNA/wCQkB713afcFfsvh7/uL9Twc0/iDLj/AI9n+lclN/rm+tdbcf8AHs/0rkpv9c31r7PF9DxapraJ981uVh6J981uVth/gRdP4Ty34xjPg24/3TXx3bL++k/3jX2N8YRnwbcf7pr4+t0/fyf71fmnGMrYqPofQ5av3bLsScCrkacVDGvAq5GtfGuZ6diSNKtRx8DimRqM1aQYFYyqrZAotj4oCw4rf0W1eOYEg9ag0eFJZVDDvXdw6fbxwKyqM1yzxHK9TaFPmL9nxaLn0qG6dADmmjzAML0qlfCZIS7dK6KeNilcr2LbOO8SkNMxUcVlaPdxRSHcOc1rak8coYHk1y837i4AXjJrCVaNSV0enHDudPkOo1HUp54URHOPStjRVPkozda5q1t5bhEwDXZ6dYSw2quw4xWsqzko8zPMVNU6nKWmPNNbOKViN1IeRXQdLZCSa0vDpJv6zTjmrWj3K214WfpWdd/u2TPWJ6Eg+SlrDGuQBfvUo12A9WrwHFnFys2iaiZ+Kpw6jFcD5CKez5HWkkx2Nfw+2dTH1rvk+4K868ONnVRzXoqf6sV+0eHX+4P1Pn81/iDLj/j2f6VyU3+ub611tx/x7P8ASuSm/wBc31r7XF9DxapraJ981uVh6J981uVth/gRdP4TzH4v/wDIm3Gf7pr5AhZRLJ/vV9f/ABfGfB1wP9k18cqGEsn+8a/MeMlfFr0Po8s/hs1ElX1q1DNuYBTWH5pXqa0NIkR7ob2wM18VODtc9OKu7Hc6Zo7XEKyMnBqzeaWsEJIHOK1NIvYY7BUBHSpLgm6fYgzn0rhcJTdobnqU6cYL3locrp95Jb6kkXTLV6pbndYxt6iuBk8P3A1OOURNgHPSu/tBiyjQ9QBV4zDVKKj7RWZM5U5O9MlUVX1Uf8S1h7VcHSqmrf8AIPb6VwNGafvI4HyPO1IRkcE0a/oBilhaFDz1qE3/ANn1tA3A3V2Ml1a3sCbWViBX0mW4WlVw7fU1rValGcX0MvS4bW1hT7QQp966lrm1k08LCwP0rmb22t3TM8nlgdDVTTdStft32WOcMBx1rDEYKVNJra5y61KnMb56mpYlUrzUMjxg53UizJ/Cc0U3Z3ZpJXJpI4xzVR1BP7vrTpJkI61HaMvnnBzV1W5rlitWRJNK7HJvB/eZAqQyQA/epbx08o4ODWQSfWuKtgZ0WlU6nKqilsdBb6gluPlapzrv+1XKNJgdahaQnPzVj7CIXPTfBmrC510IGzzXsURzGD7V87/DlmPigck819Dw/wCpX6V+ucBQUcE0u54GafxBLj/j2f6VyU3+ub611tx/x7P9K5Kb/XN9a+uxfQ8Wqa2iffNblYeiffNblbYf4EXT+E83+K8Zk8JTgf3TXyUNNmeSTbGT83pX2h400ltT0aSEdxXlGm+AktpGaZFbmvynjfERp4yKfY+kyz+GzwUaDezOALd8H2rotG8B3czhmVl/CvoG08PaXAgDWqE/Srq2FlH/AKuFV+gr4aeNb0SPSi7M8euPDVzpemBl3MR2Famm2ctv4fbUnjJZBnbivS5bC3mG2SMEU1tPtvshtliGw9sV35FjaWHxHPWReLrSq0uRHC+H9bfV42WSyK7TjJFP1i8bS2QxoX3HoO1d1Yadp9jZyRx26qzdwKyX8P8An3LPMAy5yM19HxDnGDr0FCnaUn17Hn4GE6c+aWxmWkjT2SzMpBIziq+rj/iWt9K6caWFiEaAACqF9oslzEYl71+ea7Hrwqx5rs8N1wMk7Op5FZ+neIbyzlwysVBr1O8+G91cXO/d8tMn+HATT5I/LG8jg4r08Jivq6Vnqep9aozjyyOI1DW49YsPLjnCOByAa87sNcvdM8WMCHdQ3Wu6sfhJr0GtTTNO3lMSQM1qXHgH7ChllhDPjrivVnjFCTTlzXLpVKDjyrQaviiGbS/NaZVkx93PNcXqPxTudLvhbC3ZgTjNRSeBNdufGCXEMjra55TtXRar8PwZY7qS3DbBk8U6cqWGknUfMn07EpUqistCTSfGb6jAXnUxZHGeK2PDmvNeau0ODtz1rhtW02e4aOGwhaLZwcDGa6bQo30iFHkhYuepxW1FqnUjOWifTsRXpwdKUY7ne3EO5y2/8Kz5vlbGavW1rPe2YuhkA9qpy2cxuRHg81pm1O69otj56OjsysAWkCjvWhHojyqrDPNaVh4ZmdlkJ966m2s0giCuoOK+dqVbbGhF4E8P/ZNXWcnmvaIxiMfSvOPDXGqgDpmvSE/1Yr9Z4Ak5YFt9zwM0/ijLj/j2f6VyU3+ub611tx/x7P8ASuSm/wBc31r7DF9DxqpraJ981uVh6J981uVth/gRdP4TL1k4smxXGKxOee9dnrP/AB5PXGL1P1r8b4//AN+h6H0eWfwmLRRRXwx6QUUUUAGAaXJpKKLAFGOc96KKAF3H1pCA33qKKAGeTH6CoptPtJ1IlQEVYoppjuzOXRNNRsrEop0mk2EqFHiBBq9jimkYNVzN7salJbMxf+EU0MNuFsufpTz4Z0dlAa3Xj2rWx7UnArT2knux+0l3M46VBDD5UCAJ6UyPSbUfO8Y3fStQk4qNjTdao1ZvQzfcrBBGMJUb5qZs1E+MURj3Fc0PDX/IWFekp/qxXnHhoD+1fxr0dP8AViv2DgH/AHJ+p4OZv94MuP8Aj2f6VyU3+ub611tx/wAez/SuSm/1zfWvr8X0PHqmton3zW5WHon3zW5W2H+BF0/hMrWQ32NuOK4wEZP1r0K6txc25iPesB/DihiQetfm/GXDuMxuJjWw8bqx7eAxdOnBxmc7ketGR610H/COj1o/4R0etfHf6o5p/wA+zv8Ar1Huc/ketGR610H/AAjo9aP+EdHrR/qjmn/PsPr1Huc/ketGR610H/COj1o/4R0etH+qOaf8+w+vUe5z+R60ZHrXQf8ACOj1o/4R0etH+qOaf8+w+vUe5z+R60ZHrXQf8I6PWj/hHR60f6o5p/z7D69R7nP5HrRketdB/wAI6PWj/hHR60f6pZp/z7D69R7nP5HrRlfWug/4R0etJ/wjo9af+qWaf8+w+vUe5z2R60hx610X/COL60Hw4PU01wlmn8gfXqPc5tmGOtRFh61058Ng9zTT4ZX1NP8A1TzP/n2T9eo9zlmYetQOR611p8Lqf4qafCi5HNarhTM0vgF9dpdzI8Nq39p5AzXosefLGaxtL0BLGUS55rcr9O4Tyqtl+F5K2jbPHxtaNWd4kVx/x7P9K5Kb/XN9a624/wCPZ/pXJTf65vrXu4voebVNbRPvmtysPRPvmtytsP8AAi6fwhRRRW5YUUUUrIAoorB1LxVZabf/AGWYHdSk4x1Ym7bm9RXH3fxC0m0lVJOp9609M8U2GpoWiIGBnrUqpBuyYuZdzdorBfxVYJcGHPI96b/wlun+Zszz9aOeA+ZHQUVif8JNY+v61SvvHGmWKky/zoc4LdhzI6iiuQ0f4g6TrF00EAwR6mtW+8SWVjD5jnI9jQqkGrpiUlubVFY0PiOym0s3oYBQOmaxh8RdJN+tqVIdjjrQ6kFuw5l3Oyo49qri6jax+0gjbtzXLab4xtbrXpLIOCVOOtNyirXG5JHY0YFNRxIgYd6dVWQwwKTA9KWiiwBRRRTAiuP+PZ/pXJTf65vrXW3H/Hs/0rkpv9c31rixfQxqmton3zW5WHon3zW5W2H+BF0/hCiiitywooooAK8/8W6M97qDSQqTJ2r0CoHtYnm8xhzUVIc6sTJX0PANV8N6nHcB7lWwKLZ9UgTy7EsD3r3a90i0vhiZB+VUYPCemQOWROT7VxvCNO8WZey10PJtHs9Xnvy0+4k+tNu7TU4NYLHdsr2eHQ7KB9yLz9KZP4fsbhiXX9Kr6q7bj9loeHvcao/iCKOMt5ZPNXvFPhvWNQmthZqxU43Yr1hfCOlrOJQnzD2rWjsYI8YUcdOKSwjaakwVLozxa48KahoOmRT2qMszDkipdNh1O1YXniDcbQjvXsl5ZQ3sQjmXIFVNR0Ky1LSxYzr+7HoKr6rZ3iP2VtjxaZ9Xm8TrdWJb+xgfmHbFSa5aWl3qkN7panbHgsRXr9t4Y0610c6dGn7o+1QW3g7SrWB4kU4brkVP1WVrE+yZxMev3d7oj2lo7b1Tb+leeeBdO8Rad8SJ73V9/wBmZyRmve7HwlplhIzwqct14qzL4esJTkoAfUCiWGlJxk3qhum3Zsv2cqTWivH90ip6itrdLaARR/dFS12o2CiiimAUUUUARXH/AB7P9K5Kb/XN9a624/49n+lclN/rm+tcWL6GNU1tE++a3Kw9E++a3K2w/wACLp/CFFFFblhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUARXH/Hs/0rkpv9c31rrbj/j2f6VyU3+ub61xYvoY1T//2Q==";
+const products=Array.from({length:30},(_,i)=>({
+ id:i+1,name:"Nama Produk",price:"Rp--.---,-",rating:5,
+ category:i%3===0?"Top Choice":"New Arrival",
+ description:"Produk pilihan Seed It yang mendukung transaksi lebih bertanggung jawab terhadap lingkungan."
+}));
+let cart=JSON.parse(localStorage.getItem("seed-it-cart")||"[]");
+let selected=1;
+
+function header(){document.getElementById("badge").textContent=cart.reduce((a,x)=>a+x.qty,0)}
+function stars(n=5){return "★".repeat(n)+"☆".repeat(5-n)}
+function productCard(p,detail=true){
+ return `<article class="card">
+   <div class="prod-img"><img src="${img}" alt="${p.name}"></div>
+   <h4>${p.name}</h4><div class="price">${p.price}</div><div class="stars">${stars(p.rating)}</div>
+   ${detail?`<div class="mini-actions"><button onclick="go('detail',${p.id})">Detail</button><button onclick="add(${p.id})">+</button></div>`:""}
+ </article>`;
+}
+function go(page,id=1){
+ selected=id;
+ const app=document.getElementById("app");
+ if(page==="home")app.innerHTML=home();
+ if(page==="catalog")app.innerHTML=catalog();
+ if(page==="detail")app.innerHTML=detail(id);
+ if(page==="checkout")app.innerHTML=checkout();
+ if(page==="impact")app.innerHTML=impact();
+ if(page==="profile")app.innerHTML=profile();
+ window.scrollTo({top:0,behavior:"smooth"});header();
+}
+function home(){
+ return `<div class="page" id="home">
+ <section class="hero"><div class="hero-img"><div class="hero-copy"><h1>Belanja mudah, belanja hijau, mulai dari sekarang!</h1><p>“Aku memilih produk ramah lingkungan, karena aku berkontribusi terhadap lingkungan melalui setiap transaksi yang kulakukan.”</p></div></div><div class="brand"><div><h1>Seed It</h1><div class="tagline">“Dari setiap transaksi, lahir sebuah aksi”</div></div></div></section>
+ <section class="section white-section rounded-top"><h2 class="title">Our Picks</h2><div class="rule"></div><div class="picks">${products.slice(0,6).map(productCard).join("")}</div></section>
+ <section class="impact"><h2 class="title">Bukti Nyata</h2><div class="impact-grid"><div><div class="impact-icon">📦</div><div class="impact-num">000</div><p>Produk telah sampai ke<br>tangan konsumen.</p></div><div><div class="impact-icon">🤝</div><div class="impact-num">000</div><p>Donasi telah terkumpul.</p></div><div><div class="impact-icon">🌱</div><div class="impact-num">000</div><p>Kontribusi terhadap<br>lingkungan.</p></div></div></section>
+ </div>`;
+}
+function catalog(){
+ return `<div class="catalog-page"><div class="toolbar">Sort by: <button class="sort-btn" onclick="sortCatalog('price')">Price</button><button class="sort-btn" onclick="sortCatalog('new')">Newest</button></div>
+ <div class="catalog-layout"><aside class="filters"><strong>Filter</strong><strong>Sort by</strong><label>Rating</label><label>★★★★★</label><label>★★★★☆</label><label>★★★☆☆</label><strong>Category</strong><label>Top Choice</label><label>New Arrival</label></aside><section><div id="catalogGrid" class="catalog-grid">${products.map(productCard).join("")}</div></section></div></div>`;
+}
+function filterProducts(q){
+ if(location.hash!=="#catalog")go('catalog');
+ const val=q.toLowerCase();const list=products.filter(p=>(p.name+" "+p.category).toLowerCase().includes(val));
+ const grid=document.getElementById("catalogGrid");if(grid)grid.innerHTML=(list.length?list:products.slice(0,6)).map(productCard).join("");
+}
+function sortCatalog(type){showToast(type==="price"?"Produk diurutkan berdasarkan harga.":"Produk terbaru ditampilkan.");}
+function detail(id){
+ const p=products.find(x=>x.id===id)||products[0];
+ return `<div class="detail-page"><div class="detail-box"><div class="detail-main"><div class="prod-img"><img src="${img}" alt="${p.name}"></div><div><h2>${p.name}</h2><p>Deskripsi<br>Produk</p><div class="stars">${stars(5)}</div><strong>${p.price}</strong><div class="qty" style="margin-top:6px"><button onclick="change(-1)">−</button><span id="dq">00</span><button onclick="change(1)">+</button></div><button class="pay" onclick="add(${p.id})">Check-out</button></div></div></div><div class="review"><h3>Review</h3><div style="display:flex;justify-content:center;gap:10px;align-items:center"><span class="stars">☆☆☆☆☆</span><input placeholder="insert..."></div></div></div>`;
+}
+function change(d){let e=document.getElementById("dq");let n=Math.max(0,Number(e.textContent)+d);e.textContent=String(n).padStart(2,"0")}
+function checkout(){
+ const total=cart.reduce((a,x)=>a+x.qty,0);
+ return `<div class="checkout-page"><div class="checkout-box"><div class="fieldbar" onclick="openAddress()">Adress & Buyer Data</div><div class="checkout-product"><div class="prod-img"><img src="${img}" alt="Nama Produk"></div><div><h3>Nama Produk</h3><div class="stars">${stars(5)}</div></div><strong>QTY</strong></div><div class="delivery" onclick="showToast('Pilihan pengiriman dibuka.')">Delivery Option</div><div class="donate" onclick="openDonation()">Donate Now!</div><div class="pay-row"><button class="pay" onclick="payNow()">Pay Now</button><strong style="font-size:22px">Rp--.--,-</strong></div></div></div>`;
+}
+function impact(){
+ return `<div class="impact-page"><div class="impact-hero"><img src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=800&q=85"><div class="impact-hero-text"><h2>Ubah Setiap Transaksi Menjadi Aksi.<br>Sekarang giliran Anda untuk<br>memberi dampak.</h2><p>Setiap langkah kecil, ketika dilakukan bersama, dapat menghasilkan perubahan yang berarti.</p></div></div><h2 class="title">Bukti Nyata</h2>
+ ${impactRow("📦","Produk telah sampai ke tangan konsumen.","Pohon tertanam","Pohon pertama","Pohon pertumbuhan")}
+ ${impactRow("🤝","Donasi telah terkumpul.","Pohon tertanam","Pohon pertama","Pohon pertumbuhan")}
+ ${impactRow("🌱","Kontribusi terhadap lingkungan.","Pohon tertanam","Pohon pertama","Pohon pertumbuhan")}
+ <div class="join-link">Sekarang giliran Anda untuk memberi dampak terhadap lingkungan.<br>Ikuti perjalanan kami lebih lanjut dan bergabung bersama kami.<br><br><a href="#join" onclick="openModal('signinModal')">Gabung bersama kami!</a></div></div>`;
+}
+function impactRow(icon,text,a,b,c){return `<div class="impact-item"><div class="text">${text}<br><br>Melalui kontribusi bersama, Seed It mencatat dampak nyata yang dapat dilihat dan dikembangkan.</div><div class="impact-count"><div class="impact-icon">${icon}</div><div class="impact-num">000</div><small>kontribusi</small></div><div class="green-box">○ ${a}<br>○ ${b}<br>○ ${c}</div></div>`}
+function profile(){return `<div class="profile-page"><div class="profile-card"><div class="profile-icon">♙</div><p><b>Name:</b> Pulih Bersama Sejiwa</p><p><b>E-mail:</b> pulihbersamasejiwa@gmail.com</p><p><b>Address:</b> Jl. Mahabarata 77, Saranjana</p><button onclick="openAddress()">Edit</button></div></div>`}
+function add(id){const x=cart.find(c=>c.id===id);if(x)x.qty++;else cart.push({id,qty:1});localStorage.setItem("seed-it-cart",JSON.stringify(cart));header();showToast("Produk ditambahkan ke keranjang.");}
+function payNow(){openModal("payment","Pay Now");}
+function openAddress(){openModal("address")}
+function openDonation(){openModal("donation")}
+function openModal(type,title){
+ const m=document.getElementById("modal"),c=document.getElementById("modalCard");m.classList.add("open");
+ if(type==="signin")c.innerHTML=`<button class="close" onclick="closeModal()">×</button><h2>Sign In</h2><div class="form"><input placeholder="E-mail"><input placeholder="Password"><input placeholder="Confirm Password"><input placeholder="Phone Number"><div class="signin-buttons"><button onclick="showToast('Akun buyer dibuat dalam mode demo.');closeModal()">Be Buyer</button><button onclick="showToast('Mode seller dibuka.');closeModal();openModal('seller')">Be Seller</button></div></div>`;
+ if(type==="seller")c.innerHTML=`<button class="close" onclick="closeModal()">×</button><h2>Seller</h2><div class="form"><input placeholder="E-mail"><input placeholder="Password"><input placeholder="Phone Number"><button onclick="showToast('Login seller berhasil pada mode demo.');closeModal()">Log In</button></div>`;
+ if(type==="address")c.innerHTML=`<button class="close" onclick="closeModal()">×</button><h2>Adress & Buyer Data</h2><div class="form"><input placeholder="Adress"><input placeholder="Description"><input placeholder="Buyer's Name"><input placeholder="Phone Number"><button onclick="showToast('Data pembeli disimpan.');closeModal()">Save & Buy</button></div>`;
+ if(type==="donation")c.innerHTML=`<button class="close" onclick="closeModal()">×</button><h2>Donation</h2><div class="form"><input placeholder="Nominal"><input placeholder="Description"><button onclick="showToast('Donasi tersimpan pada mode demo.');closeModal()">Save & Buy</button></div>`;
+ if(type==="payment")c.innerHTML=`<button class="close" onclick="closeModal()">×</button><h2>Payment</h2><div class="form"><input placeholder="Payment method"><input placeholder="Transaction note"><button onclick="showToast('Pembayaran berhasil pada mode demo.');closeModal()">Confirm Payment</button></div>`;
+}
+function closeModal(){document.getElementById("modal").classList.remove("open")}
+function outside(e){if(e.target.id==="modal")closeModal()}
+function showToast(t){const x=document.getElementById("toast");x.textContent=t;x.style.display="block";setTimeout(()=>x.style.display="none",2200)}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+go("home");
+</script>
+</body>
+</html>
